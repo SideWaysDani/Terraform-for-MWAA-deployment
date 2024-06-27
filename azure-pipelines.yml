@@ -3,7 +3,7 @@
 #- main
 
 pool:
-  name: Default
+  name: Azure Pipelines
 
 stages:
 - stage: deploy_stage
