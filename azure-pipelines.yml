@@ -3,7 +3,7 @@
 #- main
 
 pool:
-  name: Terraform-Mwaa-Pool
+  name: Default
 
 stages:
 - stage: deploy_stage
