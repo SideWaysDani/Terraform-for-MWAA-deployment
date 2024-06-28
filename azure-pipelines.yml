@@ -23,11 +23,10 @@ stages:
       inputs:
         provider: 'aws'
         command: 'init'
-        commandOptions: '-debug'
         backendServiceAWS: 'aws-us-east-1'
         backendAWSBucketName: 'azure-terraform-state-s3-bucket'
         backendAWSKey: 'tf/terraform.tfstate'
-
+      
 #    - task: TerraformTaskV4@4
 #      inputs:
 #        provider: 'aws'
