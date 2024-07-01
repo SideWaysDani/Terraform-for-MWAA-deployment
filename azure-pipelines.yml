@@ -4,6 +4,7 @@
 
 pool:
   name: Azure Pipelines
+  vmImage: 'windows-latest'
 
 stages:
 - stage: deploy_stage
@@ -41,14 +42,7 @@ stages:
       inputs:
         Value: '1'
         Unit: 'minutes'
-    - task: TerraformTaskV4@4
-      inputs:
-        provider: 'aws'
-        command: 'show'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-aws-mwaa/examples/basic'
-        outputTo: 'console'
-        outputFormat: 'default'
-        environmentServiceNameAWS: 'aws-us-east-1'
+
 
     - task: TerraformTaskV4@4
       inputs:
@@ -59,26 +53,34 @@ stages:
  
 
       
-#    - task: TerraformTaskV4@4
-#      inputs:
-#        provider: 'aws'
-#        command: 'apply'
-#        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-aws-mwaa/examples/basic'
-#        environmentServiceNameAWS: 'aws-us-east-1'
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'aws'
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-aws-mwaa/examples/basic'
+        environmentServiceNameAWS: 'aws-us-east-1'
 
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'aws'
+        command: 'show'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-aws-mwaa/examples/basic'
+        outputTo: 'console'
+        outputFormat: 'default'
+        environmentServiceNameAWS: 'aws-us-east-1'      
  
-#    - task: Wait@1
-#      inputs:
-#        Value: '5'
-#        Unit: 'minutes'
+    - task: Wait@1
+      inputs:
+        Value: '120'
+        Unit: 'minutes'
   
  
-#    - task: TerraformTaskV4@4
-#      inputs:
-#        provider: 'aws'
-#        command: 'destroy'
-#        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-aws-mwaa/examples/basic'
-#        environmentServiceNameAWS: 'aws-us-east-1'
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'aws'
+        command: 'destroy'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-aws-mwaa/examples/basic'
+        environmentServiceNameAWS: 'aws-us-east-1'
 
 # Schedule configuration added below
 #schedules:
