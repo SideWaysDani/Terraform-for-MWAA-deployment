@@ -1,4 +1,13 @@
- #####################################################################################
+terraform {
+  backend "s3" {
+    bucket = "azure-terraform-state-s3-bucket"  # Replace with your S3 bucket name
+    key    = "terraform.tfstate"  # Optional: Specify the key name within the bucket (defaults to terraform.tfstate)
+    region = "aws-us-east-1"        # Replace with the AWS region where your bucket resides
+  }
+}
+
+
+#####################################################################################
 # Terraform module examples are meant to show an _example_ on how to use a module
 # per use-case. The code below should not be copied directly but referenced in order
 # to build your own root module that invokes this module
@@ -31,8 +40,8 @@ module "mwaa" {
   dag_s3_path       = "dags"
 
   ## If uploading requirements.txt or plugins, you can enable these via these options
-  #plugins_s3_path      = "plugins.zip"
-  #requirements_s3_path = "requirements.txt"
+  plugins_s3_path      = "plugins/plugins.zip"
+  requirements_s3_path = "requirements/requirements.txt"
 
   logging_configuration = {
     dag_processing_logs = {
